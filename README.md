@@ -99,7 +99,7 @@ https://docs.microsoft.com/en-us/virtualization/windowscontainers/management/man
 Below steps are taken from stephan scherer github io article
 https://stefanscherer.github.io/protecting-a-windows-2016-docker-engine-with-tls/
 ### Create Certificates in Azure VM
-PS C:\Users\sy> docker run --rm -e SERVER_NAME=<azureVMhostName>.westeurope.cloudapp.azure.com -e IP_ADDRESSES=127.0.0.1,<azureVMstaticIP> -v C:\ProgramData\docker:c:\programData\docker -v $env:USERPROFILE\.docker:C:\Users\ContainerAdministrator\.docker raj2sudha/dockertls-windows-1709
+PS C:\Users\sy> docker run --rm -e SERVER_NAME=#azureVMhostName#.westeurope.cloudapp.azure.com -e IP_ADDRESSES=127.0.0.1,#azureVMstaticIP# -v C:\ProgramData\docker:c:\programData\docker -v $env:USERPROFILE\.docker:C:\Users\ContainerAdministrator\.docker raj2sudha/dockertls-windows-1709
     Directory: C:\
 Mode                LastWriteTime         Length Name----                -------------         ------ ----d-----        5/21/2018  12:38 PM                DockerSSLCARoot
 === Generating CA private password

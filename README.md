@@ -99,48 +99,9 @@ https://docs.microsoft.com/en-us/virtualization/windowscontainers/management/man
 Below steps are taken from stephan scherer github io article
 https://stefanscherer.github.io/protecting-a-windows-2016-docker-engine-with-tls/
 ### Create Certificates in Azure VM
-PS C:\Users\sy> docker run --rm -e SERVER_NAME=#azureVMhostName#.westeurope.cloudapp.azure.com -e IP_ADDRESSES=127.0.0.1,#azureVMstaticIP# -v C:\ProgramData\docker:c:\programData\docker -v $env:USERPROFILE\.docker:C:\Users\ContainerAdministrator\.docker raj2sudha/dockertls-windows-1709
-    Directory: C:\
-Mode                LastWriteTime         Length Name
-----                -------------         ------ ----
-d-----        5/21/2018  12:38 PM                DockerSSLCARoot
-=== Generating CA private password
-=== Writing out private key password
-=== Generating CA private keyGenerating RSA private key, 4096 bit long modulus
-....................................++............................++e is 65537 (0x10001)
-=== Generating CA public key
-=== Reading in CA Private Key Password
-=== Generating Server private keyGenerating RSA private key, 4096 bit long modulus
-..............................................................................++..........................................................................++e is 65537 (0x10001)
-=== Generating Server signing request
-=== Signing Server requestsubjectAltName = IP:127.0.0.1,IP:104.45.12.226,DNS.1:az1709.westeurope.cloudapp.azure.comSignature oksubject=/CN=az1709.westeurope.cloudapp.azure.comGetting CA Private Key
-=== Generating Client keyGenerating RSA private key, 4096 bit long modulus
-.........................++...................................................................................++e is 65537 (0x10001)
-=== Generating Client signing request
-=== Signing Client signing requestSignature oksubject=/CN=clientGetting CA Private Key
-=== Copying Server certificates to C:\ProgramData\docker\certs.d
-=== Copying Client certificates to C:\Users\ContainerAdministrator\.docker
-=== Creating / Updating C:\ProgramData\docker\config\daemon.json
-=== FinishedNow restart Docker service with the following command:restart-service docker
+PS C:\Users\sy> docker run --rm -e SERVER_NAME=#azureVMhostName#.westeurope.cloudapp.azure.com -e IP_ADDRESSES=127.0.0.1,#azureVMstaticIP# -v C:\ProgramData\docker:c:\programData\docker -v $env:USERPROFILE\.docker:C:\Users\ContainerAdministrator\.docker raj2sudha/dockertls-windows-1709     Directory: C: Mode                LastWriteTime         Length Name ----                -------------         ------ ---- d-----        5/21/2018  12:38 PM                DockerSSLCARoot === Generating CA private password === Writing out private key password === Generating CA private keyGenerating RSA private key, 4096 bit long modulus ....................................++............................++e is 65537 (0x10001) === Generating CA public key === Reading in CA Private Key Password === Generating Server private keyGenerating RSA private key, 4096 bit long modulus ..............................................................................++..........................................................................++e is 65537 (0x10001) === Generating Server signing request === Signing Server requestsubjectAltName = IP:127.0.0.1,IP:104.45.12.226,DNS.1:az1709.westeurope.cloudapp.azure.comSignature oksubject=/CN=az1709.westeurope.cloudapp.azure.comGetting CA Private Key === Generating Client keyGenerating RSA private key, 4096 bit long modulus .........................++...................................................................................++e is 65537 (0x10001) === Generating Client signing request === Signing Client signing requestSignature oksubject=/CN=clientGetting CA Private Key === Copying Server certificates to C:\ProgramData\docker\certs.d === Copying Client certificates to C:\Users\ContainerAdministrator.docker === Creating / Updating C:\ProgramData\docker\config\daemon.json === FinishedNow restart Docker service with the following command:restart-service docker
+Azure VM : docker version PS C:\Users\sy.docker> docker version Client:  Version:      17.10.0-ee-preview-3  API version:  1.33  Go version:   go1.8.4  Git commit:   1649af8  Built:        Fri Oct  6 17:52:28 2017  OS/Arch:      windows/amd64 
 
-
-Azure VM : docker version
-PS C:\Users\sy\.docker> docker version
-Client: 
-Version:      17.10.0-ee-preview-3 
-API version:  1.33 
-Go version:   go1.8.4 
-Git commit:   1649af8 
-Built:        Fri Oct  6 17:52:28 2017 
-OS/Arch:      windows/amd64
-Server: 
-Version:      17.10.0-ee-preview-3 API 
-version:  1.34 (minimum version 1.24)
-Go version:   go1.8.4 
-Git commit:   b8571fd 
-Built:        Fri Oct  6 18:01:48 2017 
-OS/Arch:      windows/amd64 
-Experimental: false
 
 
 ### Copy Certificates from Azure VM to local PC

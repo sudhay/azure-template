@@ -99,62 +99,63 @@ https://docs.microsoft.com/en-us/virtualization/windowscontainers/management/man
 Below steps are taken from stephan scherer github io article
 https://stefanscherer.github.io/protecting-a-windows-2016-docker-engine-with-tls/
 ### Create Certificates in Azure VM
-PS C:\Users\sy> docker run --rm -e SERVER_NAME=#azureVMhostName#.westeurope.cloudapp.azure.com -e IP_ADDRESSES=127.0.0.1,#azureVMstaticIP# -v C:\ProgramData\docker:c:\programData\docker -v $env:USERPROFILE\.docker:C:\Users\ContainerAdministrator\.docker raj2sudha/dockertls-windows-1709    <br/> Directory: C:  <br/>Mode                LastWriteTime         Length Name  <br/>----                -------------         ------ ----  <br/>d-----        5/21/2018  12:38 PM                DockerSSLCARoot  <br/>=== Generating CA private password  <br/>=== Writing out private key password  <br/>=== Generating CA private keyGenerating RSA private key, 4096 bit long modulus ....................................++............................++e is 65537 (0x10001)  <br/>=== Generating CA public key === Reading in CA Private Key Password  <br/>=== Generating Server private keyGenerating RSA private key, 4096 bit long modulus ..............................................................................++..........................................................................++e is 65537 (0x10001)  <br/>=== Generating Server signing request  <br/>=== Signing Server requestsubjectAltName = IP:127.0.0.1,IP:104.45.12.226,DNS.1:az1709.westeurope.cloudapp.azure.comSignature oksubject=/CN=az1709.westeurope.cloudapp.azure.comGetting CA Private Key  <br/>=== Generating Client keyGenerating RSA private key, 4096 bit long modulus .........................++...................................................................................++e is 65537 (0x10001)  <br/>=== Generating Client signing request  <br/>=== Signing Client signing requestSignature oksubject=/CN=clientGetting CA Private Key  <br/>=== Copying Server certificates to C:\ProgramData\docker\certs.d  <br/>=== Copying Client certificates to C:\Users\ContainerAdministrator.docker  <br/>=== Creating / Updating C:\ProgramData\docker\config\daemon.json  <br/>=== FinishedNow restart Docker service with the following command: <br/>restart-service docker
+PS C:\Users\sy> docker run --rm -e SERVER_NAME=#azureVMhostName#.westeurope.cloudapp.azure.com -e IP_ADDRESSES=127.0.0.1,#azureVMstaticIP# -v C:\ProgramData\docker:c:\programData\docker -v $env:USERPROFILE\.docker:C:\Users\ContainerAdministrator\.docker raj2sudha/dockertls-windows-1709    <br/> Directory: C:  <br/>Mode                LastWriteTime         Length Name  <br/>----                -------------         ------ ----  <br/>d-----        5/21/2018  12:38 PM                DockerSSLCARoot  <br/>=== Generating CA private password  <br/>=== Writing out private key password  <br/>=== Generating CA private keyGenerating RSA private key, 4096 bit long modulus ....................................++............................++e is 65537 (0x10001)  <br/>=== Generating CA public key === Reading in CA Private Key Password  <br/>=== Generating Server private keyGenerating RSA private key, 4096 bit long modulus ..............................................................................++..........................................................................++e is 65537 (0x10001)  <br/>=== Generating Server signing request  <br/>=== Signing Server requestsubjectAltName = IP:127.0.0.1,IP:#azureVMStaticIP#,DNS.1:#azureVMhostName#.westeurope.cloudapp.azure.comSignature oksubject=/CN=#azureVMhostName#.westeurope.cloudapp.azure.comGetting CA Private Key  <br/>=== Generating Client keyGenerating RSA private key, 4096 bit long modulus .........................++...................................................................................++e is 65537 (0x10001)  <br/>=== Generating Client signing request  <br/>=== Signing Client signing requestSignature oksubject=/CN=clientGetting CA Private Key  <br/>=== Copying Server certificates to C:\ProgramData\docker\certs.d  <br/>=== Copying Client certificates to C:\Users\ContainerAdministrator.docker  <br/>=== Creating / Updating C:\ProgramData\docker\config\daemon.json  <br/>=== FinishedNow restart Docker service with the following command: <br/>restart-service docker
 Azure VM : docker version  <br/>PS C:\Users\sy.docker> docker version  <br/>Client:   <br/>Version:      17.10.0-ee-preview-3   <br/>API version:  1.33   <br/>Go version:   go1.8.4   <br/>Git commit:   1649af8   <br/>Built:        Fri Oct  6 17:52:28 2017   <br/>OS/Arch:      windows/amd64 
-
+<br/>Server:  <br/>Version:      17.10.0-ee-preview-3 <br/>API version:  1.34 (minimum version 1.24) <br/>Go version:   go1.8.4  <br/>Git commit:   b8571fd  <br/>Built:        Fri Oct  6 18:01:48 2017  <br/>OS/Arch:      windows/amd64  <br/>Experimental: false
 
 
 ### Copy Certificates from Azure VM to local PC
 
 Azure VM Certificate Path : $env:USERPROFILE\.docker
-local PC Certificate Path : $env:USERPROFILE\.docker
+<br/>local PC Certificate Path : $env:USERPROFILE\.docker
 
 Then Update the Environment Variables in local PC
-PS C:\Users\sy> ls env:DOCKER_*
-Name                           Value
-----                           -----
-DOCKER_TOOLBOX_INSTALL_PATH    C:\Program Files\Docker Toolbox
-DOCKER_HOST                    tcp://<azureVMhostName>.westeurope.cloudapp.azure.com:2376
-DOCKER_TLS_VERIFY              1
-DOCKER_MACHINE_NAME            default
-DOCKER_CERT_PATH               C:\Users\sy\.docker
+<br/>PS C:\Users\sy> ls env:DOCKER_*
+<br/>Name                           Value
+<br/>----                           -----
+<br/>DOCKER_TOOLBOX_INSTALL_PATH    C:\Program Files\Docker Toolbox
+<br/>DOCKER_HOST                    tcp://#azureVMhostName#.westeurope.cloudapp.azure.com:2376
+<br/>DOCKER_TLS_VERIFY              1
+<br/>DOCKER_MACHINE_NAME            default
+<br/>DOCKER_CERT_PATH               C:\Users\sy\.docker
     
-PS C:\Users\sy> docker version
-Client:         18.03.0-ce 
-API version:   go1.9.4owngraded from 1.37) 
-Git comFri Mar 23 08:31:36 2018 
-OS/Arch:       falsews/amd64 
-Orchestrator:  swarm
-Server: 
-Engine:        17.10.0-ee-preview-3 
-API version:  go1.8.4inimum version 1.24)  
-Git commit:   Fri Oct  6 18:01:48 2017  
-OS/Arch:      falsews/amd64
+<br/>PS C:\Users\sy> docker version
+<br/>Client:         18.03.0-ce 
+<br/>API version:   go1.9.4owngraded from 1.37) 
+<br/>Git comFri Mar 23 08:31:36 2018 
+<br/>OS/Arch:       falsews/amd64 
+<br/>Orchestrator:  swarm
+
+<br/>Server: 
+<br/>Engine:        17.10.0-ee-preview-3 
+<br/>API version:  go1.8.4inimum version 1.24)  
+<br/>Git commit:   Fri Oct  6 18:01:48 2017  
+<br/>OS/Arch:      falsews/amd64
 
 
-=============================================
-After this we have to copy the azure VM from ~/.docker/machine/machines/az1709
-to local VM path ~/.docker/machine/machines/
+<br/>=============================================
+<br/>After this we have to copy the azure VM from ~/.docker/machine/machines/#azureVMhostName#
+<br/>to local VM path ~/.docker/machine/machines/
 
-For me both azure VM and local VM had the same Users (C:\Users\sy)
+<br/>For me both azure VM and local VM had the same Users (C:\Users\sy)
 
-For you if they are different.
-Go to local VM path : ~/.docker/machine/machines/az1709 
-Open Config.json and at end of the files Cert paths should be updated to your local user.
+<br/>For you if they are different.
+<br/>Go to local VM path : ~/.docker/machine/machines/#azureVMhostName# 
+<br/>Open Config.json and at end of the files Cert paths should be updated to your local user.
 
 
 
  "AuthOptions": {            
- "CertDir": "/Users/<localUser>/.docker/machine/machines/az1709",            
+ "CertDir": "/Users/<localUser>/.docker/machine/machines/#azureVMhostName#",            
  "CaCertPath": "/Users/<localUser>/.docker/ca.pem",            
- "CaPrivateKeyPath": "/Users/<localUser>/.docker/machine/machines/az1709/ca-key.pem",            
+ "CaPrivateKeyPath": "/Users/<localUser>/.docker/machine/machines/#azureVMhostName#/ca-key.pem",            
  "CaCertRemotePath": "",            
- "ServerCertPath": "/Users/<localUser>/.docker/machine/machines/az1709/server.pem",           
- "ServerKeyPath": "/Users/<localUser>/.docker/machine/machines/az1709/server-key.pem",           
+ "ServerCertPath": "/Users/<localUser>/.docker/machine/machines/#azureVMhostName#/server.pem",           
+ "ServerKeyPath": "/Users/<localUser>/.docker/machine/machines/#azureVMhostName#/server-key.pem",           
  "ClientKeyPath": "/Users/<localUser>/.docker/key.pem",            
  "ServerCertRemotePath": "",           
  "ServerKeyRemotePath": "",           
  "ClientCertPath": "/Users/<localUser>/.docker/cert.pem",           
  "ServerCertSANs": [],            
- "StorePath": "/Users/<localUser>/.docker/machine/machines/az1709"        
+ "StorePath": "/Users/<localUser>/.docker/machine/machines/#azureVMhostName#"        
  }

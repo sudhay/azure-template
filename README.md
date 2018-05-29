@@ -29,7 +29,7 @@ docker run --rm `
   -e SERVER_NAME=$(hostname) `
   -e IP_ADDRESSES=127.0.0.1,192.168.254.135 `
   -v "$(pwd)\server:c:\programdata\docker" `
-  -v "$(pwd)\client\.docker:c:\users\containeradministrator\.docker" raj2sudha/dockertls-windows-1709
+  -v "$(pwd)\client\.docker:c:\users\containeradministrator\.docker" sudhakary/dockertls-windows-1709
 dir server\certs.d
 dir server\config
 dir client\.docker
@@ -49,7 +49,7 @@ docker run --rm `
   -e SERVER_NAME=$(hostname) `
   -e IP_ADDRESSES=127.0.0.1,192.168.254.135 `
   -v "c:\programdata\docker:c:\programdata\docker" `
-  -v "$env:USERPROFILE\.docker:c:\users\containeradministrator\.docker" raj2sudha/dockertls-windows-1709
+  -v "$env:USERPROFILE\.docker:c:\users\containeradministrator\.docker" sudhakary/dockertls-windows-1709
 ```
 
 Afterwards restart the Docker service in an administrator SHELL
@@ -89,7 +89,7 @@ docker run --rm `
   -e MACHINE_HOME=/Users/you `
   -e MACHINE_IP=192.168.254.135 `
   -v "c:\programdata\docker:c:\programdata\docker" `
-  -v "$env:USERPROFILE\.docker:c:\users\containeradministrator\.docker" raj2sudha/dockertls-windows-1709
+  -v "$env:USERPROFILE\.docker:c:\users\containeradministrator\.docker" sudhakary/dockertls-windows-1709
 ```
 
 Read this article : Remote Management of a Windows Docker Host
@@ -101,7 +101,7 @@ https://stefanscherer.github.io/protecting-a-windows-2016-docker-engine-with-tls
 https://github.com/StefanScherer/docker-windows-azure
 
 ### Create Certificates in Azure VM
-PS C:\Users\sy> docker run --rm -e SERVER_NAME=#azureVMhostName#.westeurope.cloudapp.azure.com -e IP_ADDRESSES=127.0.0.1,#azureVMstaticIP# -v C:\ProgramData\docker:c:\programData\docker -v $env:USERPROFILE\.docker:C:\Users\ContainerAdministrator\.docker raj2sudha/dockertls-windows-1709    <br/> Directory: C:  <br/>Mode                LastWriteTime         Length Name  <br/>----                -------------         ------ ----  <br/>d-----        5/21/2018  12:38 PM                DockerSSLCARoot  <br/>=== Generating CA private password  <br/>=== Writing out private key password  <br/>=== Generating CA private keyGenerating RSA private key, 4096 bit long modulus ....................................++............................++e is 65537 (0x10001)  <br/>=== Generating CA public key === Reading in CA Private Key Password  <br/>=== Generating Server private keyGenerating RSA private key, 4096 bit long modulus ..............................................................................++..........................................................................++e is 65537 (0x10001)  <br/>=== Generating Server signing request  <br/>=== Signing Server requestsubjectAltName = IP:127.0.0.1,IP:#azureVMStaticIP#,DNS.1:#azureVMhostName#.westeurope.cloudapp.azure.comSignature oksubject=/CN=#azureVMhostName#.westeurope.cloudapp.azure.comGetting CA Private Key  <br/>=== Generating Client keyGenerating RSA private key, 4096 bit long modulus .........................++...................................................................................++e is 65537 (0x10001)  <br/>=== Generating Client signing request  <br/>=== Signing Client signing requestSignature oksubject=/CN=clientGetting CA Private Key  <br/>=== Copying Server certificates to C:\ProgramData\docker\certs.d  <br/>=== Copying Client certificates to C:\Users\ContainerAdministrator.docker  <br/>=== Creating / Updating C:\ProgramData\docker\config\daemon.json  <br/>=== FinishedNow restart Docker service with the following command: <br/>restart-service docker
+PS C:\Users\sy> docker run --rm -e SERVER_NAME=#azureVMhostName#.westeurope.cloudapp.azure.com -e IP_ADDRESSES=127.0.0.1,#azureVMstaticIP# -v C:\ProgramData\docker:c:\programData\docker -v $env:USERPROFILE\.docker:C:\Users\ContainerAdministrator\.docker sudhakary/dockertls-windows-1709    <br/> Directory: C:  <br/>Mode                LastWriteTime         Length Name  <br/>----                -------------         ------ ----  <br/>d-----        5/21/2018  12:38 PM                DockerSSLCARoot  <br/>=== Generating CA private password  <br/>=== Writing out private key password  <br/>=== Generating CA private keyGenerating RSA private key, 4096 bit long modulus ....................................++............................++e is 65537 (0x10001)  <br/>=== Generating CA public key === Reading in CA Private Key Password  <br/>=== Generating Server private keyGenerating RSA private key, 4096 bit long modulus ..............................................................................++..........................................................................++e is 65537 (0x10001)  <br/>=== Generating Server signing request  <br/>=== Signing Server requestsubjectAltName = IP:127.0.0.1,IP:#azureVMStaticIP#,DNS.1:#azureVMhostName#.westeurope.cloudapp.azure.comSignature oksubject=/CN=#azureVMhostName#.westeurope.cloudapp.azure.comGetting CA Private Key  <br/>=== Generating Client keyGenerating RSA private key, 4096 bit long modulus .........................++...................................................................................++e is 65537 (0x10001)  <br/>=== Generating Client signing request  <br/>=== Signing Client signing requestSignature oksubject=/CN=clientGetting CA Private Key  <br/>=== Copying Server certificates to C:\ProgramData\docker\certs.d  <br/>=== Copying Client certificates to C:\Users\ContainerAdministrator.docker  <br/>=== Creating / Updating C:\ProgramData\docker\config\daemon.json  <br/>=== FinishedNow restart Docker service with the following command: <br/>restart-service docker
 Azure VM : docker version  <br/>PS C:\Users\sy.docker> docker version  <br/>Client:   <br/>Version:      17.10.0-ee-preview-3   <br/>API version:  1.33   <br/>Go version:   go1.8.4   <br/>Git commit:   1649af8   <br/>Built:        Fri Oct  6 17:52:28 2017   <br/>OS/Arch:      windows/amd64 
 <br/>Server:  <br/>Version:      17.10.0-ee-preview-3 <br/>API version:  1.34 (minimum version 1.24) <br/>Go version:   go1.8.4  <br/>Git commit:   b8571fd  <br/>Built:        Fri Oct  6 18:01:48 2017  <br/>OS/Arch:      windows/amd64  <br/>Experimental: false
 

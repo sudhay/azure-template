@@ -11,7 +11,7 @@ azure template to create windowsserver 2016
 </a>
 
 ## Windows Server 1709 LTS channel
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fysudhakar%2Fazure-template%2Fmaster%2Ftemplate-1709-1.json" target="_blank">    <img src="http://azuredeploy.net/deploybutton.png"/></a>
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fysudhakar%2Fazure-template%2Fmaster%2Ftemplate-1709.json" target="_blank">    <img src="http://azuredeploy.net/deploybutton.png"/></a>
 
 
 Login into Azure Vm and install git
